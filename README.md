@@ -1,1 +1,1 @@
-# projects
+# customer churn analysis
