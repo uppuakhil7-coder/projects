@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Churn Analysis</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: "Arial", sans-serif;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-top: 30px;
+      }
+      .form-control {
+        border-radius: 10px;
+      }
+      .btn-submit {
+        background: #ff4081;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+      }
+      .btn-submit:hover {
+        background: #e91e63;
+      }
+      h2 {
+        text-align: center;
+        color: #673ab7;
+        font-weight: bold;
+        text-shadow: 2px 2px #ff80ab;
+      }
+      .output-box {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: #673ab7;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Customer Churn Analysis</h2>
+      <form id="churnForm">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Gender:</label>
+            <input type="text" class="form-control" id="gender" />
+          </div>
+          <div class="col-md-6">
+            <label>Senior Citizen:</label>
+            <input type="text" class="form-control" id="SeniorCitizen" />
+          </div>
+          <div class="col-md-6">
+            <label>Partner:</label>
+            <input type="text" class="form-control" id="Partner" />
+          </div>
+          <div class="col-md-6">
+            <label>Dependents:</label>
+            <input type="text" class="form-control" id="Dependents" />
+          </div>
+          <div class="col-md-6">
+            <label>Tenure:</label>
+            <input type="number" class="form-control" id="tenure" />
+          </div>
+          <div class="col-md-6">
+            <label>Phone Service:</label>
+            <input type="text" class="form-control" id="PhoneService" />
+          </div>
+          <div class="col-md-6">
+            <label>Multiple Lines:</label>
+            <input type="text" class="form-control" id="MultipleLines" />
+          </div>
+          <div class="col-md-6">
+            <label>Internet Service:</label>
+            <input type="text" class="form-control" id="InternetService" />
+          </div>
+          <div class="col-md-6">
+            <label>Online Security:</label>
+            <input type="text" class="form-control" id="OnlineSecurity" />
+          </div>
+          <div class="col-md-6">
+            <label>Online Backup:</label>
+            <input type="text" class="form-control" id="OnlineBackup" />
+          </div>
+          <div class="col-md-6">
+            <label>Device Protection:</label>
+            <input type="text" class="form-control" id="DeviceProtection" />
+          </div>
+          <div class="col-md-6">
+            <label>Tech Support:</label>
+            <input type="text" class="form-control" id="TechSupport" />
+          </div>
+          <div class="col-md-6">
+            <label>Streaming TV:</label>
+            <input type="text" class="form-control" id="StreamingTV" />
+          </div>
+          <div class="col-md-6">
+            <label>Streaming Movies:</label>
+            <input type="text" class="form-control" id="StreamingMovies" />
+          </div>
+          <div class="col-md-6">
+            <label>Contract:</label>
+            <input type="text" class="form-control" id="Contract" />
+          </div>
+          <div class="col-md-6">
+            <label>Paperless Billing:</label>
+            <input type="text" class="form-control" id="PaperlessBilling" />
+          </div>
+          <div class="col-md-6">
+            <label>Payment Method:</label>
+            <input type="text" class="form-control" id="PaymentMethod" />
+          </div>
+          <div class="col-md-6">
+            <label>Monthly Charges:</label>
+            <input type="number" class="form-control" id="MonthlyCharges" />
+          </div>
+          <div class="col-md-6">
+            <label>Total Charges:</label>
+            <input type="number" class="form-control" id="TotalCharges" />
+          </div>
+        </div>
+        <br />
+        <button
+          type="button"
+          class="btn btn-submit btn-lg w-100"
+          onclick="predictChurn()"
+        >
+          Submit
+        </button>
+      </form>
+
+      <div id="output" class="output-box mt-3">
+        Prediction: <span id="predictionResult">N/A</span>
+      </div>
+    </div>
+
+    <script>
+      function predictChurn() {
+        let formData = new FormData();
+
+        formData.append("gender", document.getElementById("gender").value);
+        formData.append(
+          "SeniorCitizen",
+          document.getElementById("SeniorCitizen").value
+        );
+        formData.append("Partner", document.getElementById("Partner").value);
+        formData.append(
+          "Dependents",
+          document.getElementById("Dependents").value
+        );
+        formData.append("tenure", document.getElementById("tenure").value);
+        formData.append(
+          "PhoneService",
+          document.getElementById("PhoneService").value
+        );
+        formData.append(
+          "MultipleLines",
+          document.getElementById("MultipleLines").value
+        );
+        formData.append(
+          "InternetService",
+          document.getElementById("InternetService").value
+        );
+        formData.append(
+          "OnlineSecurity",
+          document.getElementById("OnlineSecurity").value
+        );
+        formData.append(
+          "OnlineBackup",
+          document.getElementById("OnlineBackup").value
+        );
+        formData.append(
+          "DeviceProtection",
+          document.getElementById("DeviceProtection").value
+        );
+        formData.append(
+          "TechSupport",
+          document.getElementById("TechSupport").value
+        );
+        formData.append(
+          "StreamingTV",
+          document.getElementById("StreamingTV").value
+        );
+        formData.append(
+          "StreamingMovies",
+          document.getElementById("StreamingMovies").value
+        );
+        formData.append("Contract", document.getElementById("Contract").value);
+        formData.append(
+          "PaperlessBilling",
+          document.getElementById("PaperlessBilling").value
+        );
+        formData.append(
+          "PaymentMethod",
+          document.getElementById("PaymentMethod").value
+        );
+        formData.append(
+          "MonthlyCharges",
+          document.getElementById("MonthlyCharges").value
+        );
+        formData.append(
+          "TotalCharges",
+          document.getElementById("TotalCharges").value
+        );
+
+        fetch("http://127.0.0.1:5000/predict", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("predictionResult").innerText = data.churn
+              ? "Churn"
+              : "No Churn";
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+    </script>
+  </body>
+</html>
